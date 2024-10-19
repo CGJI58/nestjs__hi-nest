@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 
@@ -11,9 +11,8 @@ export class UsersController {
     return this.userService.getAll();
   }
 
-  @Get('login')
-  create(@Query('code') code: string) {
-    console.log(code);
-    return this.userService.create(code);
+  @Post('login')
+  create(@Body() ghCode: string) {
+    return this.userService.create(ghCode);
   }
 }

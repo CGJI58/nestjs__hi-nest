@@ -9,9 +9,25 @@ export class UsersService {
     return this.users;
   }
 
-  create(code: string) {
+  async create(ghCode: string) {
+    const baseUrl = 'https://github.com/login/oauth/access_token';
+    const config = {
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      code: ghCode,
+    };
+    const params = new URLSearchParams(config).toString();
+    const accessTokenReqestURL = `${baseUrl}?${params}`;
+    const accessToken = await fetch(accessTokenReqestURL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    console.log(accessToken);
+
     this.users.push({
-      code,
+      ghCode,
     });
   }
 }
