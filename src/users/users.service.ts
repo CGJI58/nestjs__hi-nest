@@ -30,7 +30,12 @@ export class UsersService {
         },
       })
     ).json();
-    return accessTokenReqest['access_token'];
+    const accessToken = accessTokenReqest['access_token'];
+    if (typeof accessToken === 'string') {
+      return accessToken;
+    } else {
+      throw new Error('Cannot get accessToken from github O Auth app.');
+    }
   }
 
   generateHashCode(accessToken: string) {
