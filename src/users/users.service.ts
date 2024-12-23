@@ -12,8 +12,8 @@ export class UsersService {
   generateAccessTokenRequestURL(ghCode: string) {
     const baseUrl = 'https://github.com/login/oauth/access_token';
     const config = {
-      client_id: process.env.CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET,
+      client_id: process.env.DEPLOY_CLIENT_ID,
+      client_secret: process.env.DEPLOY_CLIENT_SECRET,
       code: ghCode,
     };
     const params = new URLSearchParams(config).toString();
